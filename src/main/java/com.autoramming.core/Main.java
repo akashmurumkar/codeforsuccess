@@ -1,9 +1,7 @@
-package com.autoramming.basics;
+package com.autoramming.core;
 
-public class DataTypes {
-
+public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
     }
-
 }

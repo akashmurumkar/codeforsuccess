@@ -1,5 +1,8 @@
 package com.autoramming.core.basics;
 
+import java.util.StringJoiner;
+import java.util.StringTokenizer;
+
 public class AboutString {
 
     /**
@@ -24,6 +27,9 @@ public class AboutString {
      * - toUpperCase(): Returns a new string with all characters converted to uppercase.
      * - trim(): Returns a new string with leading and trailing whitespace removed.
      * - concat(otherString): Returns a new string that is the concatenation of this string and the specified string.
+     * - intern(): Returns a new string that is the same as this string, but stored in the string pool.
+     * - hashCode(): Returns the hash code value of the string.
+     * - equals(other): Returns true if the string is equal to the other string.
      * <p>
      * String Pool:
      * In Java, the string pool is a memory area where strings are stored.
@@ -53,11 +59,14 @@ public class AboutString {
      * - StringBuffer
      * <p>
      * StringBuilder and StringBuffer are mutable, which means that they can be changed after they are created.
-     * This is because they store the string in a mutable memory area.
+     * This is because they store the string in a mutable memory area and faster than String which means that they are more efficient.
+     * They were introduced in Java 5.
      * <p>
-     * StringBuilder and StringBuffer are thread-safe, which means that they can be used concurrently by multiple threads.
+     * StringBuilder is not thread-safe, which means that it cannot be used concurrently by multiple threads.
+     * StringBuffer is thread-safe, which means that they can be used concurrently by multiple threads.
      * <p>
-     * StringBuilder and StringBuffer are faster than String, which means that they are more efficient.
+     * StringBuilder is faster than StringBuffer because it is not synchronized.
+     * StringBuffer is slower than StringBuilder because it is synchronized.
      */
 
     public static void main(String[] args) {
@@ -89,6 +98,7 @@ public class AboutString {
         stringBuffer();
         stringFormat();
         immutableString();
+        questions();
     }
 
     static void immutableString() {
@@ -368,6 +378,38 @@ public class AboutString {
         StringBuffer buffer = new StringBuffer("Hello, ");
         buffer.append("world!");
         System.out.println(buffer.toString());
+    }
+
+    static void questions() {
+        String s1 = "John";
+        String s2 = "John";
+
+        System.out.println(s1.hashCode());
+        System.out.println(s2.hashCode());
+
+        // SCP - 1, Heap - 0
+
+        String s3 = new String("John");
+        String s4 = new String("John");
+
+        // SCP - 1, Heap - 2
+
+        String s5 = "John";
+        String s6 = "John";
+        String s7 = new String("John");
+
+        // SCP - 1, Heap - 1
+
+        String s8 = "John";
+        String s9 = "Doe";
+        String s10 = s8 + s9;
+
+        // SCP - 2, Heap - 1
+
+        String s11 = "John";
+        String s12 = new String("John").intern();
+
+        // SCP - 1, Heap - 1
     }
 
 }
